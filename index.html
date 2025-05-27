@@ -1,0 +1,1693 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Dev Store - Mobile</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--tg-theme-bg-color, #ffffff);
+      color: var(--tg-theme-text-color, #333);
+      line-height: 1.5;
+      font-weight: 400;
+      padding-bottom: 80px;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Mobile Header */
+    .mobile-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: #2c3e50;
+      padding: 15px 20px;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .menu-btn {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 20px;
+      padding: 8px;
+      border-radius: 8px;
+      transition: background 0.3s ease;
+    }
+
+    .menu-btn:active {
+      background: rgba(255,255,255,0.1);
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 800;
+      color: white;
+      text-decoration: none;
+      letter-spacing: -1px;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .header-icon {
+      color: white;
+      font-size: 18px;
+      padding: 8px;
+      border-radius: 8px;
+      transition: background 0.3s ease;
+      position: relative;
+    }
+
+    .header-icon:active {
+      background: rgba(255,255,255,0.1);
+    }
+
+    .cart-badge {
+      position: absolute;
+      top: 2px;
+      right: 2px;
+      background: #ff4757;
+      color: white;
+      border-radius: 50%;
+      width: 18px;
+      height: 18px;
+      font-size: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+    }
+
+    /* Main Content */
+    .main-content {
+      margin-top: 70px;
+      padding-bottom: 20px;
+    }
+
+    /* Hero Section */
+    .hero-section {
+      position: relative;
+      height: 50vh;
+      background: url('/new-hero-banner.jpeg') center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      color: white;
+      margin-bottom: 20px;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.4);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 0 20px;
+      text-align: center;
+    }
+
+    .hero-badge {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 15px;
+      display: inline-block;
+      letter-spacing: 1px;
+    }
+
+    .hero-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 20px;
+      letter-spacing: -1px;
+    }
+
+    .hero-btn {
+      background: white;
+      color: #333;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 25px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 12px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    .hero-btn:active {
+      transform: translateY(1px);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+
+    /* Section Headers */
+    .section-header {
+      padding: 20px;
+      text-align: center;
+      background: #f8f9fa;
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #333;
+      margin-bottom: 8px;
+    }
+
+    .section-subtitle {
+      color: #666;
+      font-size: 14px;
+    }
+
+    /* Collection Section */
+    .collection-section {
+      padding: 20px;
+      background: #f8f9fa;
+      margin-bottom: 20px;
+    }
+
+    .collection-main-image {
+      position: relative;
+      border-radius: 15px;
+      overflow: hidden;
+      margin-bottom: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+
+    .collection-main-image img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+    }
+
+    .collection-badge {
+      background: #333;
+      color: white;
+      padding: 6px 12px;
+      border-radius: 15px;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 15px;
+      display: inline-block;
+    }
+
+    .collection-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      margin-bottom: 15px;
+      color: #333;
+      line-height: 1.2;
+    }
+
+    .collection-btn {
+      background: transparent;
+      border: 2px solid #333;
+      color: #333;
+      padding: 10px 20px;
+      border-radius: 20px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 12px;
+      transition: all 0.3s ease;
+      margin-bottom: 20px;
+      width: 100%;
+    }
+
+    .collection-btn:active {
+      background: #333;
+      color: white;
+    }
+
+    .collection-products {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    .collection-product {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+    }
+
+    .collection-product:active {
+      transform: translateY(2px);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+
+    .collection-product-image {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+    }
+
+    .collection-product-info {
+      padding: 12px;
+      text-align: center;
+    }
+
+    .collection-product-name {
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 5px;
+      color: #333;
+    }
+
+    .collection-product-price {
+      font-size: 14px;
+      font-weight: 700;
+      color: #333;
+    }
+
+    /* Filter Section */
+    .filter-section {
+      background: white;
+      padding: 15px 20px;
+      border-bottom: 1px solid #e9ecef;
+      position: sticky;
+      top: 70px;
+      z-index: 90;
+    }
+
+    .filter-scroll {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding-bottom: 5px;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .filter-scroll::-webkit-scrollbar {
+      display: none;
+    }
+
+    .filter-btn {
+      background: #f8f9fa;
+      border: 1px solid #ddd;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      white-space: nowrap;
+      transition: all 0.3s ease;
+      min-width: fit-content;
+    }
+
+    .filter-btn.active {
+      background: #333;
+      color: white;
+      border-color: #333;
+    }
+
+    .search-container {
+      margin-top: 15px;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid #ddd;
+      border-radius: 25px;
+      font-size: 14px;
+      background: #f8f9fa;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: #333;
+      background: white;
+    }
+
+    /* Product Grid */
+    .products-grid {
+      padding: 20px;
+    }
+
+    .products-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    .product-card {
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .product-card:active {
+      transform: translateY(2px);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    }
+
+    .product-image-container {
+      position: relative;
+      width: 100%;
+      height: 180px;
+      overflow: hidden;
+    }
+
+    .product-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: all 0.3s ease;
+    }
+
+    .product-image-secondary {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+
+    .product-card:active .product-image {
+      opacity: 0;
+    }
+
+    .product-card:active .product-image-secondary {
+      opacity: 1;
+    }
+
+    .product-badge {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: #ff4757;
+      color: white;
+      padding: 4px 8px;
+      border-radius: 10px;
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+      z-index: 2;
+    }
+
+    .product-info {
+      padding: 15px;
+    }
+
+    .product-name {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 5px;
+      color: #333;
+      line-height: 1.2;
+    }
+
+    .product-description {
+      font-size: 11px;
+      color: #666;
+      margin-bottom: 10px;
+      line-height: 1.3;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .product-price {
+      font-size: 16px;
+      font-weight: 800;
+      color: #333;
+      margin-bottom: 12px;
+    }
+
+    .add-to-cart {
+      background: #333;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      width: 100%;
+      transition: all 0.3s ease;
+    }
+
+    .add-to-cart:active {
+      background: #555;
+      transform: translateY(1px);
+    }
+
+    /* Cart Sidebar */
+    .cart-sidebar {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 100%;
+      height: 100vh;
+      background: white;
+      transition: right 0.3s ease;
+      z-index: 1000;
+      overflow-y: auto;
+    }
+
+    .cart-sidebar.open {
+      right: 0;
+    }
+
+    .cart-header {
+      padding: 20px;
+      border-bottom: 1px solid #e9ecef;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #f8f9fa;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .cart-header h5 {
+      font-weight: 700;
+      font-size: 18px;
+      margin: 0;
+    }
+
+    .close-cart {
+      background: none;
+      border: none;
+      font-size: 24px;
+      color: #333;
+      padding: 8px;
+      border-radius: 8px;
+    }
+
+    .close-cart:active {
+      background: #e9ecef;
+    }
+
+    .cart-items {
+      padding: 20px;
+      min-height: calc(100vh - 200px);
+    }
+
+    .cart-item {
+      display: flex;
+      gap: 15px;
+      padding: 15px 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .cart-item-image {
+      width: 60px;
+      height: 60px;
+      border-radius: 8px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .cart-item-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .cart-item-info {
+      flex: 1;
+    }
+
+    .cart-item-name {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 5px;
+      color: #333;
+    }
+
+    .cart-item-price {
+      font-size: 14px;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 8px;
+    }
+
+    .quantity-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .qty-btn {
+      width: 32px;
+      height: 32px;
+      border: 1px solid #ddd;
+      background: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .qty-btn:active {
+      background: #333;
+      color: white;
+      border-color: #333;
+    }
+
+    .cart-total {
+      padding: 20px;
+      border-top: 1px solid #e9ecef;
+      background: #f8f9fa;
+      position: sticky;
+      bottom: 0;
+    }
+
+    .checkout-btn {
+      background: #333;
+      color: white;
+      border: none;
+      padding: 16px;
+      width: 100%;
+      border-radius: 25px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 14px;
+      transition: all 0.3s ease;
+    }
+
+    .checkout-btn:active {
+      background: #555;
+      transform: translateY(1px);
+    }
+
+    /* Pagination */
+    .pagination-section {
+      text-align: center;
+      padding: 20px;
+    }
+
+    .pagination-btn {
+      background: white;
+      border: 1px solid #ddd;
+      padding: 10px 14px;
+      margin: 0 2px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 14px;
+      transition: all 0.3s ease;
+      min-width: 44px;
+    }
+
+    .pagination-btn:active,
+    .pagination-btn.active {
+      background: #333;
+      color: white;
+      border-color: #333;
+    }
+
+    /* Mobile Navigation */
+    .mobile-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: white;
+      border-top: 1px solid #e9ecef;
+      padding: 8px 0;
+      z-index: 100;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+    }
+
+    .mobile-nav-container {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    .mobile-nav-item {
+      text-align: center;
+      color: #666;
+      text-decoration: none;
+      font-size: 10px;
+      font-weight: 600;
+      padding: 8px 12px;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      min-width: 60px;
+    }
+
+    .mobile-nav-item.active {
+      color: #2c3e50;
+      background: rgba(44, 62, 80, 0.1);
+    }
+
+    .mobile-nav-item:active {
+      background: rgba(44, 62, 80, 0.2);
+    }
+
+    .mobile-nav-item i {
+      font-size: 18px;
+      margin-bottom: 4px;
+    }
+
+    /* Quick View Modal */
+    .quick-view-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 9999;
+      display: none;
+      align-items: flex-end;
+      justify-content: center;
+    }
+
+    .quick-view-modal.active {
+      display: flex;
+    }
+
+    .quick-view-content {
+      background: white;
+      border-radius: 20px 20px 0 0;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      animation: slideUp 0.3s ease;
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(100%); }
+      to { transform: translateY(0); }
+    }
+
+    .quick-view-header {
+      padding: 20px;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      background: white;
+      z-index: 10;
+    }
+
+    .quick-view-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .quick-view-body {
+      padding: 20px;
+    }
+
+    .quick-view-images {
+      margin-bottom: 20px;
+    }
+
+    .quick-view-image {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 15px;
+      margin-bottom: 10px;
+    }
+
+    .quick-view-details h3 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    .quick-view-price {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: #333;
+      margin-bottom: 15px;
+    }
+
+    .quick-view-description {
+      color: #666;
+      line-height: 1.5;
+      margin-bottom: 20px;
+      font-size: 14px;
+    }
+
+    .size-selector, .color-selector {
+      margin-bottom: 20px;
+    }
+
+    .size-selector h6, .color-selector h6 {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .size-option {
+      display: inline-block;
+      padding: 8px 16px;
+      border: 1px solid #ddd;
+      border-radius: 20px;
+      margin-right: 8px;
+      margin-bottom: 8px;
+      font-size: 12px;
+      transition: all 0.3s ease;
+    }
+
+    .size-option.active {
+      background: #333;
+      color: white;
+      border-color: #333;
+    }
+
+    .color-option {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      border: 2px solid #ddd;
+      margin-right: 8px;
+      display: inline-block;
+      transition: all 0.3s ease;
+    }
+
+    .color-option.active {
+      border-color: #333;
+      transform: scale(1.1);
+    }
+
+    .quantity-selector {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .add-to-cart-btn {
+      background: #333;
+      color: white;
+      border: none;
+      padding: 16px;
+      border-radius: 25px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 14px;
+      width: 100%;
+      transition: all 0.3s ease;
+      margin-bottom: 15px;
+    }
+
+    .add-to-cart-btn:active {
+      background: #555;
+      transform: translateY(1px);
+    }
+
+    /* Overlay */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 999;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* Section Toggle */
+    .section {
+      display: none;
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      top: 90px;
+      left: 20px;
+      right: 20px;
+      background: #333;
+      color: white;
+      padding: 15px 20px;
+      border-radius: 10px;
+      z-index: 9999;
+      font-weight: 600;
+      text-align: center;
+      transform: translateY(-100px);
+      transition: transform 0.3s ease;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+    }
+
+    /* Loading */
+    .loading {
+      text-align: center;
+      padding: 40px 20px;
+      color: #666;
+    }
+
+    .loading i {
+      font-size: 24px;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* Empty State */
+    .empty-state {
+      text-align: center;
+      padding: 40px 20px;
+      color: #666;
+    }
+
+    .empty-state i {
+      font-size: 48px;
+      margin-bottom: 15px;
+      opacity: 0.5;
+    }
+
+    /* Safe Area */
+    @supports (padding: max(0px)) {
+      .mobile-header {
+        padding-top: max(15px, env(safe-area-inset-top));
+      }
+
+      .mobile-nav {
+        padding-bottom: max(8px, env(safe-area-inset-bottom));
+      }
+    }
+  </style>
+</head>
+<body>
+<!-- Mobile Header -->
+<header class="mobile-header">
+  <div class="header-left">
+    <button class="menu-btn" onclick="toggleMenu()">
+      <i class="fas fa-bars"></i>
+    </button>
+    <a href="#" class="logo" onclick="showSection('home')">DS</a>
+  </div>
+  <div class="header-right">
+    <button class="header-icon" onclick="toggleSearch()">
+      <i class="fas fa-search"></i>
+    </button>
+    <button class="header-icon" onclick="toggleCart()">
+      <i class="fas fa-shopping-bag"></i>
+      <span class="cart-badge" id="cartBadge">0</span>
+    </button>
+  </div>
+</header>
+
+<!-- Main Content -->
+<div class="main-content">
+  <!-- Home Section -->
+  <section id="home" class="section active">
+    <!-- Hero -->
+    <div class="hero-section">
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <span class="hero-badge">20% GACHA CHEGIRMALAR</span>
+        <h1 class="hero-title">HAR KUN<br>UCHUN</h1>
+        <button class="hero-btn" onclick="showSection('catalog')">KO'Z TASHLASH</button>
+      </div>
+    </div>
+
+    <!-- Collection Section -->
+    <div class="collection-section">
+      <div class="collection-main-image">
+        <img src="/t-shirt.jpeg" alt="Simple Club S25 Collection">
+      </div>
+      <span class="collection-badge">NEW!</span>
+      <h2 class="collection-title">Simple Club S25 Collection</h2>
+      <button class="collection-btn" onclick="showSection('catalog')">BARCHASI</button>
+
+      <div class="collection-products">
+        <div class="collection-product" onclick="openQuickView(5)">
+          <img src="/t-shirt.jpeg" alt="Ko'z Tegmasin" class="collection-product-image">
+          <div class="collection-product-info">
+            <div class="collection-product-name">Ko'z Tegmasin</div>
+            <div class="collection-product-price">275,000 So'm</div>
+          </div>
+        </div>
+        <div class="collection-product" onclick="openQuickView(8)">
+          <img src="/t-shirt.jpeg" alt="Plashovka" class="collection-product-image">
+          <div class="collection-product-info">
+            <div class="collection-product-name">Plashovka</div>
+            <div class="collection-product-price">450,000 So'm</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Catalog Section -->
+  <section id="catalog" class="section">
+    <div class="section-header">
+      <h2 class="section-title">Katalog</h2>
+      <p class="section-subtitle">Eng so'nggi kolleksiyalar</p>
+    </div>
+
+    <!-- Filter Section -->
+    <div class="filter-section">
+      <div class="filter-scroll">
+        <button class="filter-btn active" onclick="setFilter('all')">Barchasi</button>
+        <button class="filter-btn" onclick="setFilter('new')">Yangi</button>
+        <button class="filter-btn" onclick="setFilter('hot')">Mashhur</button>
+        <button class="filter-btn" onclick="setFilter('sale')">Chegirma</button>
+      </div>
+
+      <div class="search-container">
+        <input type="text" class="search-input" placeholder="Mahsulot qidirish..." id="searchInput" onkeyup="searchProducts()">
+      </div>
+    </div>
+
+    <!-- Products Grid -->
+    <div class="products-grid">
+      <div class="products-container" id="allProducts">
+        <!-- Products will be loaded here -->
+      </div>
+
+      <!-- Pagination -->
+      <div class="pagination-section" id="paginationSection">
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="section">
+    <div class="section-header">
+      <h2 class="section-title">Biz haqimizda</h2>
+      <p class="section-subtitle">Dev Store - zamonaviy va sifatli kiyim-kechak do'koni</p>
+    </div>
+    <div style="padding: 20px;">
+      <p style="font-size: 16px; line-height: 1.6; color: #666;">
+        Biz 2020-yildan beri O'zbekiston bozorida faoliyat yuritamiz va mijozlarimizga eng sifatli mahsulotlarni taklif etamiz.
+      </p>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="section">
+    <div class="section-header">
+      <h2 class="section-title">Kontaktlar</h2>
+      <p class="section-subtitle">Biz bilan bog'laning</p>
+    </div>
+    <div style="padding: 20px;">
+      <p style="font-size: 16px; line-height: 1.6; color: #666; text-align: center;">
+        📞 +998 90 123 45 67<br>
+        📧 info@devstore.uz<br>
+        📍 Toshkent, O'zbekiston
+      </p>
+    </div>
+  </section>
+</div>
+
+<!-- Quick View Modal -->
+<div class="quick-view-modal" id="quickViewModal">
+  <div class="quick-view-content">
+    <div class="quick-view-header">
+      <h3 class="quick-view-title">Mahsulot</h3>
+      <button class="close-cart" onclick="closeQuickView()">×</button>
+    </div>
+    <div class="quick-view-body">
+      <div class="quick-view-images">
+        <img src="/t-shirt.jpeg" alt="Product" class="quick-view-image" id="quickViewImage1">
+        <img src="/w-t-shirt.jpeg" alt="Product" class="quick-view-image" id="quickViewImage2">
+      </div>
+      <div class="quick-view-details">
+        <div style="color: #666; font-size: 12px; margin-bottom: 8px;" id="quickViewCategory">FUTBOLKALAR</div>
+        <h3 id="quickViewName">Mahsulot nomi</h3>
+        <div class="quick-view-price" id="quickViewPrice">275,000 So'm</div>
+        <p class="quick-view-description" id="quickViewDescription">Mahsulot tavsifi...</p>
+
+        <div class="size-selector">
+          <h6>O'lcham</h6>
+          <span class="size-option active">XL</span>
+        </div>
+
+        <div class="color-selector">
+          <h6>Rang</h6>
+          <div class="color-option active" style="background: #d4b896;"></div>
+        </div>
+
+        <div class="quantity-selector">
+          <span>Miqdori:</span>
+          <button class="qty-btn" onclick="updateQuickViewQty(-1)">-</button>
+          <span id="quickViewQty">1</span>
+          <button class="qty-btn" onclick="updateQuickViewQty(1)">+</button>
+        </div>
+
+        <button class="add-to-cart-btn" onclick="addToCartFromQuickView()">SAVATGA QO'SHISH</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Cart Sidebar -->
+<div class="cart-sidebar" id="cartSidebar">
+  <div class="cart-header">
+    <h5>Savatcha</h5>
+    <button class="close-cart" onclick="toggleCart()">×</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <!-- Cart items will be loaded here -->
+  </div>
+  <div class="cart-total">
+    <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+      <strong style="font-size: 16px;">Jami: <span id="cartTotal">0 so'm</span></strong>
+    </div>
+    <button class="checkout-btn" onclick="checkout()">BUYURTMA BERISH</button>
+  </div>
+</div>
+
+<!-- Mobile Navigation -->
+<nav class="mobile-nav">
+  <div class="mobile-nav-container">
+    <a href="#" class="mobile-nav-item active" onclick="showSection('home')">
+      <i class="fas fa-home"></i>
+      <span>Bosh</span>
+    </a>
+    <a href="#" class="mobile-nav-item" onclick="showSection('catalog')">
+      <i class="fas fa-th-large"></i>
+      <span>Katalog</span>
+    </a>
+    <a href="#" class="mobile-nav-item" onclick="toggleCart()">
+      <i class="fas fa-shopping-bag"></i>
+      <span>Savatcha</span>
+    </a>
+    <a href="#" class="mobile-nav-item" onclick="showSection('about')">
+      <i class="fas fa-info-circle"></i>
+      <span>Biz haqimizda</span>
+    </a>
+  </div>
+</nav>
+
+<!-- Overlay -->
+<div class="overlay" id="overlay" onclick="closeOverlay()"></div>
+
+<script>
+  // Products data
+  const products = [
+    {
+      id: 1,
+      name: "Kargo Shim",
+      price: 290000,
+      category: "pants",
+      image: "/static/t-shirt.jpeg",
+      imageSecondary: "/static/w-t-shirt.jpeg",
+      badge: "",
+      color: "havorang",
+      description: "Havo o'tkazadigan materialdan tayyorlangan katta cho'ntakli kargo shimlar.",
+      sku: "KS001"
+    },
+    {
+      id: 2,
+      name: "Kargo Shortik",
+      price: 345000,
+      category: "shorts",
+      image: "/static/t-shirt.jpeg",
+      imageSecondary: "/static/w-t-shirt.jpeg",
+      badge: "",
+      color: "havorang",
+      description: "Yozgi fasl uchun ideal kargo shortiklar.",
+      sku: "KSH002"
+    },
+    {
+      id: 3,
+      name: "Velvet Shim",
+      price: 380000,
+      category: "pants",
+      image: "/static/t-shirt.jpeg",
+      imageSecondary: "/static/w-t-shirt.jpeg",
+      badge: "",
+      color: "kulrang",
+      description: "Yumshoq velvet materialdan tayyorlangan shimlar.",
+      sku: "VS003"
+    },
+    {
+      id: 4,
+      name: "Har Kun Uchun",
+      price: 230000,
+      category: "bags",
+      image: "/static/t-shirt.jpeg",
+      imageSecondary: "/static/w-t-shirt.jpeg",
+      badge: "HOT",
+      color: "qora",
+      description: "Har kunlik foydalanish uchun qulay sumka.",
+      sku: "HKU004"
+    },
+    {
+      id: 5,
+      name: "Ko'z Tegmasin",
+      price: 275000,
+      category: "shirts",
+      image: "/static/t-shirt.jpeg",
+      imageSecondary: "/static/w-t-shirt.jpeg",
+      badge: "NEW",
+      color: "kulrang",
+      description: "Zamonaviy dizayndagi futbolka.",
+      sku: "KT005"
+    },
+    {
+      id: 6,
+      name: "Yulduz Bol",
+      price: 275000,
+      category: "shirts",
+      image: "/static/t-shirt.jpeg",
+      imageSecondary: "/static/w-t-shirt.jpeg",
+      badge: "",
+      color: "qora",
+      description: "Yulduzli dizayndagi futbolka.",
+      sku: "YB006"
+    },
+    {
+      id: 7,
+      name: "Hammasi Good Bo'ladi",
+      price: 275000,
+      category: "shirts",
+      image: "/static/t-shirt.jpeg",
+      imageSecondary: "/static/w-t-shirt.jpeg",
+      badge: "",
+      color: "oq",
+      description: "Ijobiy xabar bilan futbolka.",
+      sku: "HGB007"
+    },
+    {
+      id: 8,
+      name: "Plashovka Simple.Club",
+      price: 450000,
+      category: "jackets",
+      image: "/static/t-shirt.jpeg",
+      imageSecondary: "/static/w-t-shirt.jpeg",
+      badge: "NEW",
+      color: "havorang",
+      description: "Zamonaviy plashovka Simple.Club kolleksiyasidan.",
+      sku: "PSC008"
+    }
+  ];
+
+  let cart = [];
+  let filteredProducts = [...products];
+  let currentQuickViewProduct = null;
+  let quickViewQty = 1;
+  let currentPage = 1;
+  const itemsPerPage = 6;
+
+  // Initialize
+  document.addEventListener('DOMContentLoaded', function() {
+    loadProducts();
+    updateCartDisplay();
+    initTelegramWebApp();
+  });
+
+  // Telegram WebApp initialization
+  function initTelegramWebApp() {
+    if (window.Telegram && window.Telegram.WebApp) {
+      const tg = window.Telegram.WebApp;
+      tg.ready();
+      tg.expand();
+
+      // Set theme colors
+      if (tg.themeParams.bg_color) {
+        document.documentElement.style.setProperty('--tg-theme-bg-color', tg.themeParams.bg_color);
+      }
+      if (tg.themeParams.text_color) {
+        document.documentElement.style.setProperty('--tg-theme-text-color', tg.themeParams.text_color);
+      }
+
+      // Enable haptic feedback
+      tg.HapticFeedback.impactOccurred('light');
+    }
+  }
+
+  // Load products
+  function loadProducts() {
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const paginatedProducts = filteredProducts.slice(startIndex, endIndex);
+
+    const container = document.getElementById('allProducts');
+
+    if (paginatedProducts.length === 0) {
+      container.innerHTML = `
+                    <div class="empty-state" style="grid-column: 1 / -1;">
+                        <i class="fas fa-search"></i>
+                        <p>Hech qanday mahsulot topilmadi</p>
+                    </div>
+                `;
+    } else {
+      container.innerHTML = paginatedProducts.map(product => createProductCard(product)).join('');
+    }
+
+    updatePagination();
+  }
+
+  // Create product card
+  function createProductCard(product) {
+    return `
+                <div class="product-card" onclick="openQuickView(${product.id})">
+                    <div class="product-image-container">
+                        <img src="${product.image}" alt="${product.name}" class="product-image">
+                        <img src="${product.imageSecondary}" alt="${product.name}" class="product-image-secondary">
+                        ${product.badge ? `<span class="product-badge">${product.badge}</span>` : ''}
+                    </div>
+                    <div class="product-info">
+                        <h6 class="product-name">${product.name}</h6>
+                        <p class="product-description">${product.description}</p>
+                        <div class="product-price">${formatPrice(product.price)}</div>
+                        <button class="add-to-cart" onclick="event.stopPropagation(); addToCart(${product.id})">
+                            <i class="fas fa-plus"></i> Savatga
+                        </button>
+                    </div>
+                </div>
+            `;
+  }
+
+  // Show section
+  function showSection(sectionName) {
+    document.querySelectorAll('.section').forEach(section => {
+      section.classList.remove('active');
+    });
+
+    document.getElementById(sectionName).classList.add('active');
+
+    // Update mobile nav
+    document.querySelectorAll('.mobile-nav-item').forEach(item => {
+      item.classList.remove('active');
+    });
+
+    const currentNavItem = document.querySelector(`.mobile-nav-item[onclick*="${sectionName}"]`);
+    if (currentNavItem) {
+      currentNavItem.classList.add('active');
+    }
+
+    // Haptic feedback
+    if (window.Telegram && window.Telegram.WebApp) {
+      window.Telegram.WebApp.HapticFeedback.impactOccurred('light');
+    }
+  }
+
+  // Filter functions
+  function setFilter(type) {
+    document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+
+    if (type === 'all') {
+      filteredProducts = [...products];
+    } else {
+      filteredProducts = products.filter(product => product.badge.toLowerCase() === type);
+    }
+
+    currentPage = 1;
+    loadProducts();
+
+    // Haptic feedback
+    if (window.Telegram && window.Telegram.WebApp) {
+      window.Telegram.WebApp.HapticFeedback.impactOccurred('light');
+    }
+  }
+
+  function searchProducts() {
+    const query = document.getElementById('searchInput').value.toLowerCase();
+    filteredProducts = products.filter(product =>
+            product.name.toLowerCase().includes(query) ||
+            product.description.toLowerCase().includes(query)
+    );
+    currentPage = 1;
+    loadProducts();
+  }
+
+  // Quick View functions
+  function openQuickView(productId) {
+    const product = products.find(p => p.id === productId);
+    if (!product) return;
+
+    currentQuickViewProduct = product;
+    quickViewQty = 1;
+
+    document.getElementById('quickViewName').textContent = product.name;
+    document.getElementById('quickViewPrice').textContent = formatPrice(product.price);
+    document.getElementById('quickViewDescription').textContent = product.description;
+    document.getElementById('quickViewQty').textContent = quickViewQty;
+    document.getElementById('quickViewCategory').textContent = getCategoryName(product.category);
+
+    document.getElementById('quickViewImage1').src = product.image;
+    document.getElementById('quickViewImage2').src = product.imageSecondary;
+
+    document.getElementById('quickViewModal').classList.add('active');
+
+    // Haptic feedback
+    if (window.Telegram && window.Telegram.WebApp) {
+      window.Telegram.WebApp.HapticFeedback.impactOccurred('medium');
+    }
+  }
+
+  function closeQuickView() {
+    document.getElementById('quickViewModal').classList.remove('active');
+    currentQuickViewProduct = null;
+  }
+
+  function updateQuickViewQty(change) {
+    quickViewQty = Math.max(1, quickViewQty + change);
+    document.getElementById('quickViewQty').textContent = quickViewQty;
+
+    // Haptic feedback
+    if (window.Telegram && window.Telegram.WebApp) {
+      window.Telegram.WebApp.HapticFeedback.impactOccurred('light');
+    }
+  }
+
+  function addToCartFromQuickView() {
+    if (!currentQuickViewProduct) return;
+
+    const existingItem = cart.find(item => item.id === currentQuickViewProduct.id);
+
+    if (existingItem) {
+      existingItem.quantity += quickViewQty;
+    } else {
+      cart.push({ ...currentQuickViewProduct, quantity: quickViewQty });
+    }
+
+    updateCartDisplay();
+    closeQuickView();
+    showToast('Mahsulot savatga qo\'shildi!');
+
+    // Haptic feedback
+    if (window.Telegram && window.Telegram.WebApp) {
+      window.Telegram.WebApp.HapticFeedback.notificationOccurred('success');
+    }
+  }
+
+  // Cart functions
+  function toggleCart() {
+    const sidebar = document.getElementById('cartSidebar');
+    const overlay = document.getElementById('overlay');
+
+    sidebar.classList.toggle('open');
+    overlay.classList.toggle('active');
+
+    // Haptic feedback
+    if (window.Telegram && window.Telegram.WebApp) {
+      window.Telegram.WebApp.HapticFeedback.impactOccurred('light');
+    }
+  }
+
+  function addToCart(productId) {
+    const product = products.find(p => p.id === productId);
+    const existingItem = cart.find(item => item.id === productId);
+
+    if (existingItem) {
+      existingItem.quantity += 1;
+    } else {
+      cart.push({ ...product, quantity: 1 });
+    }
+
+    updateCartDisplay();
+    showToast('Mahsulot savatga qo\'shildi!');
+
+    // Haptic feedback
+    if (window.Telegram && window.Telegram.WebApp) {
+      window.Telegram.WebApp.HapticFeedback.notificationOccurred('success');
+    }
+  }
+
+  function updateCartDisplay() {
+    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+    document.getElementById('cartBadge').textContent = totalItems;
+
+    const container = document.getElementById('cartItems');
+
+    if (cart.length === 0) {
+      container.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-shopping-bag"></i>
+                        <p>Savatcha bo'sh</p>
+                    </div>
+                `;
+      document.getElementById('cartTotal').textContent = '0 so\'m';
+      return;
+    }
+
+    container.innerHTML = cart.map(item => `
+                <div class="cart-item">
+                    <div class="cart-item-image">
+                        <img src="${item.image}" alt="${item.name}">
+                    </div>
+                    <div class="cart-item-info">
+                        <div class="cart-item-name">${item.name}</div>
+                        <div class="cart-item-price">${formatPrice(item.price)}</div>
+                        <div class="quantity-controls">
+                            <button class="qty-btn" onclick="updateQuantity(${item.id}, -1)">-</button>
+                            <span style="font-weight: 600; min-width: 30px; text-align: center;">${item.quantity}</span>
+                            <button class="qty-btn" onclick="updateQuantity(${item.id}, 1)">+</button>
+                            <button class="qty-btn" onclick="removeFromCart(${item.id})" style="margin-left: 10px; color: #ff4757; border-color: #ff4757;">×</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    document.getElementById('cartTotal').textContent = formatPrice(total);
+  }
+
+  function updateQuantity(productId, change) {
+    const item = cart.find(item => item.id === productId);
+    if (item) {
+      item.quantity += change;
+      if (item.quantity <= 0) {
+        removeFromCart(productId);
+      } else {
+        updateCartDisplay();
+      }
+    }
+
+    // Haptic feedback
+    if (window.Telegram && window.Telegram.WebApp) {
+      window.Telegram.WebApp.HapticFeedback.impactOccurred('light');
+    }
+  }
+
+  function removeFromCart(productId) {
+    cart = cart.filter(item => item.id !== productId);
+    updateCartDisplay();
+
+    // Haptic feedback
+    if (window.Telegram && window.Telegram.WebApp) {
+      window.Telegram.WebApp.HapticFeedback.impactOccurred('medium');
+    }
+  }
+
+  function checkout() {
+    if (cart.length === 0) {
+      showToast('Savatcha bo\'sh!');
+      return;
+    }
+
+    if (window.Telegram && window.Telegram.WebApp) {
+      const tg = window.Telegram.WebApp;
+      const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+      tg.sendData(JSON.stringify({
+        action: 'checkout',
+        cart: cart,
+        total: total
+      }));
+
+      tg.HapticFeedback.notificationOccurred('success');
+    } else {
+      showToast('Buyurtma qabul qilindi!');
+    }
+
+    cart = [];
+    updateCartDisplay();
+    toggleCart();
+  }
+
+  // Helper functions
+  function getCategoryName(category) {
+    const categoryNames = {
+      'shirts': 'FUTBOLKALAR',
+      'pants': 'SHIMLAR',
+      'shorts': 'SHORTIKLAR',
+      'jackets': 'KURTKALAR',
+      'bags': 'SUMKALAR'
+    };
+    return categoryNames[category] || category.toUpperCase();
+  }
+
+  function formatPrice(price) {
+    return new Intl.NumberFormat('uz-UZ').format(price) + ' So\'m';
+  }
+
+  function showToast(message) {
+    const existingToast = document.querySelector('.toast');
+    if (existingToast) {
+      existingToast.remove();
+    }
+
+    const toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.textContent = message;
+    document.body.appendChild(toast);
+
+    setTimeout(() => {
+      toast.classList.add('show');
+    }, 100);
+
+    setTimeout(() => {
+      toast.classList.remove('show');
+      setTimeout(() => {
+        if (toast.parentNode) {
+          toast.parentNode.removeChild(toast);
+        }
+      }, 300);
+    }, 3000);
+  }
+
+  function updatePagination() {
+    const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
+    const paginationContainer = document.getElementById('paginationSection');
+
+    if (totalPages <= 1) {
+      paginationContainer.innerHTML = '';
+      return;
+    }
+
+    let paginationHTML = '';
+
+    if (currentPage > 1) {
+      paginationHTML += `<button class="pagination-btn" onclick="changePage(${currentPage - 1})">‹</button>`;
+    }
+
+    for (let i = 1; i <= totalPages; i++) {
+      paginationHTML += `<button class="pagination-btn ${i === currentPage ? 'active' : ''}" onclick="changePage(${i})">${i}</button>`;
+    }
+
+    if (currentPage < totalPages) {
+      paginationHTML += `<button class="pagination-btn" onclick="changePage(${currentPage + 1})">›</button>`;
+    }
+
+    paginationContainer.innerHTML = paginationHTML;
+  }
+
+  function changePage(page) {
+    currentPage = page;
+    loadProducts();
+
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // Haptic feedback
+    if (window.Telegram && window.Telegram.WebApp) {
+      window.Telegram.WebApp.HapticFeedback.impactOccurred('light');
+    }
+  }
+
+  function toggleSearch() {
+    const searchInput = document.getElementById('searchInput');
+    searchInput.focus();
+    showSection('catalog');
+  }
+
+  function toggleMenu() {
+    // Menu functionality can be added here
+    if (window.Telegram && window.Telegram.WebApp) {
+      window.Telegram.WebApp.HapticFeedback.impactOccurred('light');
+    }
+  }
+
+  function closeOverlay() {
+    document.getElementById('overlay').classList.remove('active');
+    document.getElementById('cartSidebar').classList.remove('open');
+    document.getElementById('quickViewModal').classList.remove('active');
+  }
+
+  // Touch events for better mobile experience
+  document.addEventListener('touchstart', function() {}, { passive: true });
+
+  // Prevent zoom on double tap
+  let lastTouchEnd = 0;
+  document.addEventListener('touchend', function (event) {
+    const now = (new Date()).getTime();
+    if (now - lastTouchEnd <= 300) {
+      event.preventDefault();
+    }
+    lastTouchEnd = now;
+  }, false);
+
+  // Close modals on outside click
+  document.addEventListener('click', function(e) {
+    if (e.target.classList.contains('quick-view-modal')) {
+      closeQuickView();
+    }
+  });
+</script>
+</body>
+</html>
