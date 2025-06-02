@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dev Store Front</title>
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <!-- Animate.css for animations -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body style="background: linear-gradient(120deg, #f6f8fa 60%, #e3f0ff 100%); min-height: 100vh;">
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm animate__animated animate__fadeInDown rounded-bottom-4">
+      <div class="container-fluid">
+        <a class="navbar-brand fw-bold text-primary" href="index.html" style="font-size:1.7rem; letter-spacing:1px;">Dev Store</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav me-auto mb-2 mb-lg-0">
+            <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+            <a class="nav-link" href="products.html">Products</a>
+          </div>
+          <div class="d-flex gap-2">
+            <a href="saved.html" class="btn btn-outline-warning animate__animated animate__fadeInRight">
+              <i class="bi bi-heart"></i> Saved
+            </a>
+            <a href="cart.html" class="btn btn-outline-success animate__animated animate__fadeInRight">
+              <i class="bi bi-cart"></i> Cart
+            </a>
+            <a href="login.html" class="btn btn-outline-primary animate__animated animate__fadeInRight">
+              <i class="bi bi-person"></i> Login
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <section class="hero text-center py-5 animate__animated animate__fadeInUp">
+      <h2 class="display-4 mb-3 fw-bold text-primary animate__animated animate__fadeInDown">Welcome to Dev Store!</h2>
+      <p class="lead mb-4 text-secondary animate__animated animate__fadeIn">Shop the latest products. Powered by your Java backend.</p>
+      <div class="d-flex justify-content-center gap-3">
+        <a href="products.html" class="btn btn-primary btn-lg px-5 animate__animated animate__pulse animate__infinite">Shop Now</a>
+        <a href="cart.html" class="btn btn-outline-secondary btn-lg px-5 animate__animated animate__fadeInUp">View Cart</a>
+      </div>
+    </section>
+    <section class="container py-5 animate__animated animate__fadeInUp">
+      <h2 class="display-5 mb-4 fw-bold text-primary text-center animate__animated animate__fadeInDown">Featured Products</h2>
+      <div id="product-list" class="row g-4 justify-content-center">
+        <!-- Products will be loaded here by JS -->
+      </div>
+    </section>
+  </main>
+  <footer class="bg-white text-center text-lg-start animate__animated animate__fadeInUp rounded-top-4 mt-5 shadow-sm">
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.03); font-size:1.1rem;">
+      &copy; 2025 Dev Store Front
+    </div>
+  </footer>
+  <!-- Bootstrap JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/products.js"></script>
+</body>
+</html>
